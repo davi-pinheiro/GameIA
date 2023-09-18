@@ -3,7 +3,7 @@
 
 class Vivo
 {
-private:
+protected:
     int vidaMaxima;
     int vida;
     int velocidade;

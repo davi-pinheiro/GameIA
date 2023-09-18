@@ -6,7 +6,6 @@ Vivo::Vivo(int vidaMaxima, int velocidade, int forca){
     this->velocidade = velocidade;
     this->forca = forca;
 }
-//Vivo::~Vivo(void);
 
 int Vivo::getVidaMaxima(void){
     return vidaMaxima;
