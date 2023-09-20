@@ -1,18 +1,32 @@
-#include "vivo.h"
 #include "vampiro.h"
 
-    Vampiro::Vampiro(int vidaMaxima, int velocidade, int forca) : Vivo(vidaMaxima, velocidade, forca)
+    Vampiro::Vampiro(int vidaMaxima, int velocidade, int forca, bool inimigo , int h, int w, int x, int y, Rgba rgba) : Vivo(vidaMaxima, velocidade, forca, inimigo, h, w, x, y, rgba)
     {
-        
+        estado = VAGAR;
     }
-    void mente(void)
-    {
 
+    State Vampiro::getEstado()
+    {
+        return estado;
     }
-    //~Inimigo();
-enum State
-{
-    VAGAR,
-    ATACAR,
-    ESCONDER
-};
+
+    void Vampiro::setEstado(State estado)
+    {
+        this->estado = estado;
+    }
+
+    void Vampiro::machine()
+    {
+        switch (estado)
+        {
+        case VAGAR:
+            
+            break;
+        case ATACAR:
+            break;
+        
+        
+        default:
+            break;
+        }
+    }
