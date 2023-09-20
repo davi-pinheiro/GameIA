@@ -3,7 +3,7 @@ INCLUDE = -Ibuild
 FLAGS = -Wall -pedantic -ansi -Iinclude
 PROGRAMA = main
 
-bin/$(PROGRAMA): build/vivo.o build/teste.o build/vampiro.o build/janela.o build/rgba.o
+bin/$(PROGRAMA): build/vivo.o build/teste.o build/vampiro.o build/janela.o build/rgba.o build/monsterCollection.o
 	g++ -o $@ $^ `sdl2-config --cflags --libs`
 
 build/vivo.o: src/vivo.cpp
@@ -21,8 +21,8 @@ build/janela.o: src/janela.cpp
 build/rgba.o: src/rgba.cpp
 	$(GPP) $(FLAGS) -c -o $@ $^
 
-#build/inimigo.o: src/inimigo.cpp
-#	$(GPP) $(FLAGS) -c -o $@ $^
+build/monsterCollection.o: src/monsterCollection.cpp
+	$(GPP) $(FLAGS) -c -o $@ $^
 
 clean_obj:
 	rm build/*.o
