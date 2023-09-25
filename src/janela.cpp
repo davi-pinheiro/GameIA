@@ -1,6 +1,13 @@
 #include "janela.h"
+#include "vampiro.h"
+#include "guerreiro.h"
+#include "teste.h"
 #include <iostream>
 
+using std::cout;
+using std::endl;
+
+Teste teste;
 
 Janela::Janela(int altura, int largura)
 {    
@@ -50,8 +57,37 @@ void Janela::frontgroundColor(Rgba rgba)
     SDL_SetRenderDrawColor(renderizador, rgba.getR(), rgba.getG(), rgba.getB(), rgba.getA());
 }
 
+void Janela::renderizarMonsters(vector<Vivo*> colecao)
+{
+    for(int i = 0; i < (int)colecao.size(); i++)
+    {
+        ((Vampiro*)colecao[i])->machine();
+        
+        frontgroundColor(colecao[i]->getRgba());
+        SDL_RenderFillRect(renderizador, colecao[i]->getPersonagem());
+    }
+}
+
+void Janela::renderizarAllies(vector<Vivo*> colecao)
+{
+    for(int i = 0; i < (int)colecao.size()-1; i++)
+    {
+        ((Guerreiro*)colecao[i])->machine();
+        
+        frontgroundColor(colecao[i]->getRgba());
+        SDL_RenderFillRect(renderizador, colecao[i]->getPersonagem());
+    }
+}
+
+void Janela::renderizarCharacter(Personagem* personagem)
+{
+    frontgroundColor(personagem->getRgba());
+    SDL_RenderFillRect(renderizador, personagem->getPersonagem());
+}
+
 Janela::~Janela()
 {
+    SDL_DestroyRenderer(renderizador);
     SDL_DestroyWindow(janela);
     SDL_Quit();
 }

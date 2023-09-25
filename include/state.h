@@ -3,6 +3,7 @@
 
 enum State
 {
+    NONE,
     VAGAR,
     ATACAR,
     ESCONDER

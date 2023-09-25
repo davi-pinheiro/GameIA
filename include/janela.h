@@ -2,7 +2,13 @@
 #define JANELA_H
 
 #include <SDL2/SDL.h>
+#include "vivo.h"
+#include <vector>
+#include "monsterCollection.h"
 #include "rgba.h"
+#include "personagem.h"
+
+using std::vector;
 
 class Janela
 {
@@ -22,8 +28,15 @@ public:
 
     SDL_Renderer* getRenderizador();
     SDL_Window* getJanela();
+
     void backgroundColor(Rgba rgba);
     void frontgroundColor(Rgba rgba);
+
+    void renderizarEntities(vector<Vivo*> colecao);
+    void renderizarMonsters(vector<Vivo*> colecao);
+    void renderizarAllies(vector<Vivo*> colecao);
+
+    void renderizarCharacter(Personagem* personagem);
 
     ~Janela();
 

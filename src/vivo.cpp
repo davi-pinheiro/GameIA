@@ -1,11 +1,14 @@
 #include "vivo.h"
+#include "teste.h"
 
-Vivo::Vivo(int vidaMaxima, int velocidade, int forca, bool inimigo , int h, int w, int x, int y, Rgba rgba){
+
+Vivo::Vivo(int vidaMaxima, int velocidade, int forca, bool isEnemy , int h, int w, int x, int y, Rgba rgba, State estado){
     this->vidaMaxima = vidaMaxima;
     this->vida = vidaMaxima;
     this->velocidade = velocidade;
     this->forca = forca;
-    this->inimigo = inimigo;
+    this->isEnemy = isEnemy;
+    this->estado = estado;
 
     personagem.h = h;
     personagem.w = w;
@@ -31,13 +34,18 @@ int Vivo::getForca(void){
     return forca;
 }
 
-bool Vivo::isInimigo(void){
-    return inimigo;
+bool Vivo::getIsEnemy(void){
+    return isEnemy;
 }
 
-SDL_Rect* Vivo::getPersonagem(void)
+vector<Vivo*> Vivo::getInimigos(void)
 {
-    return &personagem;
+    return inimigos;
+}
+
+State Vivo::getEstado()
+{
+    return estado;
 }
 
 void Vivo::setVidaMaxima(int vidaMaxima){
@@ -57,12 +65,35 @@ void Vivo::setForca(int forca){
     this->forca = forca;
 }
 
-void Vivo::setInimigo(bool inimigo)
+void Vivo::setIsEnemy(bool isEnemy)
 {
-    this->inimigo = inimigo;
+    this->isEnemy = isEnemy;
+}
+
+void Vivo::setInimigos(vector<Vivo*> inimigos)
+{
+    this->inimigos = inimigos;
+}
+
+void Vivo::setEstado(State estado)
+{
+    this->estado = estado;
+}
+
+
+SDL_Rect* Vivo::getPersonagem(void)
+{
+    return &personagem;
 }
 
 Rgba Vivo::getRgba(void)
 {
     return rgba;
 }
+
+void Vivo::machine(void)
+{
+    Teste teste;
+    teste.mensagem("Vivo");
+}
+

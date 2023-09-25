@@ -5,15 +5,17 @@
 #include "vivo.h"
 #include "state.h"
 #include "rgba.h"
+#include "personagem.h"
 
 class Vampiro : public Vivo
 {
 private:
-    State estado;
+    
 public:
-    Vampiro(int vidaMaxima, int velocidade, int forca, bool inimigo , int h, int w, int x, int y, Rgba rgba);
-    State getEstado();
-    void setEstado(State estado);
+    Vampiro(int vidaMaxima, int velocidade, int forca, bool inimigo , int h, int w, int x, int y, State estado);
+    bool isNextToEnemy();
+    bool isAttackCondition();
+    void moveToPlayer();
 
     void machine();
 };

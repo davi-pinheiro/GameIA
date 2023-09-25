@@ -1,32 +1,163 @@
 #include "vampiro.h"
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include "state.h"
 
-    Vampiro::Vampiro(int vidaMaxima, int velocidade, int forca, bool inimigo , int h, int w, int x, int y, Rgba rgba) : Vivo(vidaMaxima, velocidade, forca, inimigo, h, w, x, y, rgba)
-    {
-        estado = VAGAR;
-    }
+using std::cout;
+using std::endl;
+using std::sqrt;
+using std::pow;
 
-    State Vampiro::getEstado()
-    {
-        return estado;
-    }
+using std::rand;
 
-    void Vampiro::setEstado(State estado)
-    {
-        this->estado = estado;
-    }
+Vampiro::Vampiro(int vidaMaxima, int velocidade, int forca, bool inimigo , int h, int w, int x, int y, State estado) : Vivo(vidaMaxima, velocidade, forca, inimigo, h, w, x, y, rgba, estado)
+{
+    this->rgba = Rgba(0, 0, 0, 0);
+}
 
-    void Vampiro::machine()
+bool Vampiro::isNextToEnemy()
+{
+    int distancia;
+    for(int i = 0; i < (int)inimigos.size(); i++)
     {
-        switch (estado)
+        distancia = round(sqrt(pow(getPersonagem()->x - inimigos[i]->getPersonagem()->x, 2) + pow(getPersonagem()->y - inimigos[i]->getPersonagem()->y, 2)));
+        if(distancia < 135)
         {
-        case VAGAR:
-            
-            break;
-        case ATACAR:
-            break;
-        
-        
-        default:
-            break;
+            return true;
         }
     }
+    return false;
+}
+
+//bool Vampiro::isAttackCondition()
+//{
+    
+//}
+
+void Vampiro::moveToPlayer()
+{
+    int minDistancia = 136, distancia, indice;
+    for(int i = 0; i < (int)inimigos.size(); i++)
+    {
+        distancia = round(sqrt(pow(getPersonagem()->x - inimigos[i]->getPersonagem()->x, 2) + pow(getPersonagem()->y - inimigos[i]->getPersonagem()->y, 2)));
+        if(distancia <= 135)
+        {
+            if(distancia < minDistancia)
+            {
+                minDistancia = distancia;
+                indice = i;
+            }
+        }
+    }
+
+    if(getPersonagem()->x - inimigos[indice]->getPersonagem()->x > 0)
+    {
+        if(getPersonagem()->x - inimigos[indice]->getPersonagem()->x < 10)
+        {
+            getPersonagem()->x -= minDistancia;
+        }
+        else
+        {
+            getPersonagem()->x -= 10;
+        }
+    }
+    else if(getPersonagem()->x - inimigos[indice]->getPersonagem()->x < 0)
+    {
+        if(getPersonagem()->x - inimigos[indice]->getPersonagem()->x > -10)
+        {
+            getPersonagem()->x += minDistancia;
+        }
+        else
+        {
+            getPersonagem()->x += 10;
+        }
+    }
+
+    if(getPersonagem()->y - inimigos[indice]->getPersonagem()->y > 0)
+    {
+        if(getPersonagem()->y - inimigos[indice]->getPersonagem()->y < 10)
+        {
+            getPersonagem()->y -= minDistancia;
+        }
+        else
+        {
+            getPersonagem()->y -= 10;
+        }
+    }
+    else if(getPersonagem()->y - inimigos[indice]->getPersonagem()->y < 0)
+    {
+        if(getPersonagem()->y - inimigos[indice]->getPersonagem()->y > -10)
+        {
+            getPersonagem()->y += minDistancia;
+        }
+        else
+        {
+            getPersonagem()->y += 10;
+        }
+    }
+}
+
+void Vampiro::machine()
+{
+    int escolha;
+    escolha = rand() % 8;
+    switch (estado)
+    {
+    case VAGAR:
+        if(isNextToEnemy())
+        {
+            estado = ATACAR;
+        }
+        else
+        {
+            switch (escolha)
+            {
+            case 0:
+                personagem.x += 10;
+                break;
+            case 1:
+                personagem.x -= 10;
+                break;
+            case 2:
+                personagem.y += 10;
+                break;
+            case 3:
+                personagem.y -= 10;
+                break;
+            case 4:
+                personagem.x += 10;
+                personagem.y += 10;
+                break;
+            case 5:
+                personagem.x -= 10;
+                personagem.y += 10;
+                break;
+            case 6:
+                personagem.x += 10;
+                personagem.y -= 10;
+                break;
+            case 7:
+                personagem.x -= 10;
+                personagem.y -= 10;
+                break;
+            }
+        }
+        break;
+
+    case ATACAR:
+        if(isNextToEnemy())
+        {
+            moveToPlayer();
+        }
+        else
+        {
+            estado = VAGAR;
+        }
+        break;
+    
+    
+    default:
+        break;
+    }
+}
