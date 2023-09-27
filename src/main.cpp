@@ -8,6 +8,7 @@
 #include "monsterCollection.h"
 #include "allyCollection.h"
 #include "personagem.h"
+#include "tempo.h"
 
 
 using std::rand;
@@ -20,6 +21,7 @@ const int LARGURA = 1080;
 
 int main(int argc, char const *argv[])
 {
+    Tempo tempo;
     MonsterCollection colecaoMonster;
     AllyCollection colecaoAlly;
 
@@ -46,7 +48,7 @@ int main(int argc, char const *argv[])
             controle(personagem, evento);
         }
         
-        janela.backgroundColor(rgba);
+        janela.backgroundColor(rgba, tempo);
 
         janela.renderizarCharacter(personagem);
         janela.renderizarMonsters(colecaoMonster.getMonsterCollection());

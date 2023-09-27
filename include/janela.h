@@ -6,6 +6,7 @@
 #include <vector>
 #include "monsterCollection.h"
 #include "rgba.h"
+#include "tempo.h"
 #include "personagem.h"
 
 using std::vector;
@@ -29,7 +30,7 @@ public:
     SDL_Renderer* getRenderizador();
     SDL_Window* getJanela();
 
-    void backgroundColor(Rgba rgba);
+    void backgroundColor(Rgba rgba, Tempo tempo);
     void frontgroundColor(Rgba rgba);
 
     void renderizarEntities(vector<Vivo*> colecao);

@@ -43,8 +43,28 @@ SDL_Window* Janela::getJanela()
     return janela;
 }
 
-void Janela::backgroundColor(Rgba rgba)
+void Janela::backgroundColor(Rgba rgba, Tempo tempo)
 {
+    tempo.changeStateDay();
+    switch (tempo.getEstadoDia())
+    {
+    case MORNING:
+        rgba.setRgba(195,195,195,195);
+        break;
+    case AFTERNOON:
+        rgba.setRgba(255,255,255,255);
+        break;
+    case EVENING:
+        rgba.setRgba(195,195,195,195);
+        break;
+    case DAWN:
+        rgba.setRgba(135,135,135,135);
+        break;
+    
+    default:
+        break;
+    }
+
     frontgroundColor(rgba);
     SDL_RenderClear(renderizador);
 }
