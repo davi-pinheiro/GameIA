@@ -4,7 +4,7 @@ Tempo::Tempo()
 {
     tempoInicial = time(NULL);
     estadoDia = MORNING;
-    passou = true;
+    passou = false;
 }
 
 time_t Tempo::getTempoInicial()
@@ -22,10 +22,10 @@ void Tempo::setEstadoDia(StateDay estadoDia)
     this->estadoDia = estadoDia;
 }
 
-time_t Tempo::getTempoNow()
+int Tempo::getTempoNow()
 {
     time_t tempoAgora = time(NULL);
-    return difftime(tempoAgora, tempoInicial);
+    return (int)difftime(tempoAgora, tempoInicial);
 }
 
 void Tempo::changeStateDay()

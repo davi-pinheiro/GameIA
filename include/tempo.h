@@ -19,7 +19,7 @@ public:
     void setEstadoDia(StateDay estadoDia);
 
 
-    time_t getTempoNow();
+    int getTempoNow();
     void changeStateDay();
 
 
