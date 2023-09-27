@@ -1,13 +1,10 @@
 #include "janela.h"
 #include "vampiro.h"
 #include "guerreiro.h"
-#include "teste.h"
 #include <iostream>
 
 using std::cout;
 using std::endl;
-
-Teste teste;
 
 Janela::Janela(int altura, int largura)
 {    

@@ -1,6 +1,4 @@
 #include "vivo.h"
-#include "teste.h"
-
 
 Vivo::Vivo(int vidaMaxima, int velocidade, int forca, bool isEnemy , int h, int w, int x, int y, Rgba rgba, State estado){
     this->vidaMaxima = vidaMaxima;
@@ -93,7 +91,6 @@ Rgba Vivo::getRgba(void)
 
 void Vivo::machine(void)
 {
-    Teste teste;
-    teste.mensagem("Vivo");
+    
 }
 
