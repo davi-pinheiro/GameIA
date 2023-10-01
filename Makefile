@@ -3,7 +3,7 @@ INCLUDE = -Ibuild
 FLAGS = -Wall -pedantic -ansi -Iinclude
 PROGRAMA = main
 
-OBJ = build/vivo.o build/main.o build/vampiro.o build/janela.o build/rgba.o build/monsterCollection.o build/tempo.o build/personagem.o build/allyCollection.o build/guerreiro.o build/controle.o
+OBJ = build/vivo.o build/main.o build/vampiro.o build/janela.o build/rgba.o build/monsterCollection.o build/tempo.o build/personagem.o build/allyCollection.o build/guerreiro.o build/controle.o build/camera.o
 
 bin/$(PROGRAMA): $(OBJ)
 	g++ -o $@ $^ `sdl2-config --cflags --libs`
@@ -39,6 +39,9 @@ build/guerreiro.o: src/guerreiro.cpp
 	$(GPP) $(FLAGS) -c -o $@ $^
 
 build/controle.o: src/controle.cpp
+	$(GPP) $(FLAGS) -c -o $@ $^
+
+build/camera.o: src/camera.cpp
 	$(GPP) $(FLAGS) -c -o $@ $^
 
 clean_obj:

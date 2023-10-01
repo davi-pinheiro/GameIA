@@ -1,11 +1,17 @@
 #include "tempo.h"
+#include <iostream>
 
-Tempo::Tempo()
+using std::cout;
+using std::endl;
+
+Tempo::Tempo(int comparador)
 {
     tempoInicial = time(NULL);
     estadoDia = MORNING;
-    passou = false;
+    passou = true;
+    this->comparador = comparador;
 }
+
 
 time_t Tempo::getTempoInicial()
 {
@@ -17,10 +23,27 @@ StateDay Tempo::getEstadoDia()
     return estadoDia;
 }
 
+bool Tempo::getPassou()
+{
+    return passou;
+}
+
+int Tempo::getComparador()
+{
+    return comparador;
+}
+
+
 void Tempo::setEstadoDia(StateDay estadoDia)
 {
     this->estadoDia = estadoDia;
 }
+
+void Tempo::setComparador(int comparador)
+{
+    this->comparador = comparador;
+}
+
 
 int Tempo::getTempoNow()
 {
@@ -30,7 +53,7 @@ int Tempo::getTempoNow()
 
 void Tempo::changeStateDay()
 {
-    if((getTempoNow() % 15 == 0))
+    if((getTempoNow() % comparador == 0))
     {
         if(passou == false)
         {
@@ -53,6 +76,7 @@ void Tempo::changeStateDay()
             default:
                 break;
             }
+            cout << estadoDia << endl;
         }
     }
     else
@@ -60,4 +84,3 @@ void Tempo::changeStateDay()
         passou = false;
     }
 }
-//bool getPassou();

@@ -1,41 +1,46 @@
 #ifndef JANELA_H
 #define JANELA_H
 
+#include <vector>
 #include <SDL2/SDL.h>
 #include "vivo.h"
-#include <vector>
 #include "monsterCollection.h"
 #include "rgba.h"
 #include "tempo.h"
 #include "personagem.h"
+#include "camera.h"
 
 using std::vector;
 
 class Janela
 {
 private:
-    SDL_Window *janela;
-    SDL_Renderer *renderizador;
+    SDL_Window* janela;
+    SDL_Renderer* renderizador;
+    SDL_Texture* textura;
+    Rgba background;
     int altura;
     int largura;
 
 public:
-    Janela(int altura, int largura);
+    Janela(int mapaAltura, int mapaLargura, int telaAltura, int telaLargura);
 
     int getAltura();
-    void setAltura(int altura);
     int getLargura();
-    void setLargura(int largura);
-
     SDL_Renderer* getRenderizador();
     SDL_Window* getJanela();
+    SDL_Texture* getTextura();
 
-    void backgroundColor(Rgba rgba, Tempo tempo);
+    void setAltura(int altura);
+    void setLargura(int largura);
+
+
+
+    void backgroundColor(Tempo& tempo);
     void frontgroundColor(Rgba rgba);
 
-    void renderizarEntities(vector<Vivo*> colecao);
-    void renderizarMonsters(vector<Vivo*> colecao);
-    void renderizarAllies(vector<Vivo*> colecao);
+    void renderizarMonsters(vector<Vivo*> colecao, Camera& camera);
+    void renderizarAllies(vector<Vivo*> colecao, Camera& camera);
 
     void renderizarCharacter(Personagem* personagem);
 

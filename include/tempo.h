@@ -9,19 +9,22 @@ class Tempo
 private:
     time_t tempoInicial;
     StateDay estadoDia;
+    int comparador;
     bool passou;
+    bool block;
 public:
-    Tempo();
+    Tempo(int comparador);
+
     time_t getTempoInicial();
     StateDay getEstadoDia();
     bool getPassou();
+    int getComparador();
 
     void setEstadoDia(StateDay estadoDia);
-
+    void setComparador(int comparador);
 
     int getTempoNow();
     void changeStateDay();
-
 
 };
 
