@@ -59,7 +59,7 @@ void Vampiro::moveToPlayer()
         }
         else
         {
-            getPersonagem()->x -= 10;
+            getPersonagem()->x -= velocidade;
         }
     }
     else if(getPersonagem()->x - inimigos[indice]->getPersonagem()->x < 0)
@@ -70,7 +70,7 @@ void Vampiro::moveToPlayer()
         }
         else
         {
-            getPersonagem()->x += 10;
+            getPersonagem()->x += velocidade;
         }
     }
 
@@ -82,7 +82,7 @@ void Vampiro::moveToPlayer()
         }
         else
         {
-            getPersonagem()->y -= 10;
+            getPersonagem()->y -= velocidade;
         }
     }
     else if(getPersonagem()->y - inimigos[indice]->getPersonagem()->y < 0)
@@ -93,7 +93,7 @@ void Vampiro::moveToPlayer()
         }
         else
         {
-            getPersonagem()->y += 10;
+            getPersonagem()->y += velocidade;
         }
     }
 }
@@ -114,32 +114,32 @@ void Vampiro::machine()
             switch (escolha)
             {
             case 0:
-                personagem.x += 10;
+                personagem.x += velocidade;
                 break;
             case 1:
-                personagem.x -= 10;
+                personagem.x -= velocidade;
                 break;
             case 2:
-                personagem.y += 10;
+                personagem.y += velocidade;
                 break;
             case 3:
-                personagem.y -= 10;
+                personagem.y -= velocidade;
                 break;
             case 4:
-                personagem.x += 10;
-                personagem.y += 10;
+                personagem.x += velocidade;
+                personagem.y += velocidade;
                 break;
             case 5:
-                personagem.x -= 10;
-                personagem.y += 10;
+                personagem.x -= velocidade;
+                personagem.y += velocidade;
                 break;
             case 6:
-                personagem.x += 10;
-                personagem.y -= 10;
+                personagem.x += velocidade;
+                personagem.y -= velocidade;
                 break;
             case 7:
-                personagem.x -= 10;
-                personagem.y -= 10;
+                personagem.x -= velocidade;
+                personagem.y -= velocidade;
                 break;
             }
         }
